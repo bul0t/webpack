@@ -5,13 +5,12 @@ https://webpack.js.org/guides/getting-started
 - `npm init -y` - инициализируем проект
 - `npm install webpack webpack-cli --save-dev` - устанавливаем вебпак
 - `npm install webpack-dev-server --save-dev` - локальный сервер
-- `npm start` - запуск проекта
 
-При запуске нового проекта `npm i`, помимо файла `package.json`, еще нужен файл `package-lock.json`.
+Настраиваем структуру проекта и конфигурацию режимов сборки.
 
 ## Структура проекта
-- `/dist` - папка со скомпилированными файлами, создаётся автоматически
 - `/src` - папка с исходными файлами
+- `/dist` - папка со скомпилированными файлами, создаётся автоматически
 
     src/
         fonts/
@@ -29,19 +28,46 @@ index.css
 
 index.html
 
-    болванка
+    <!DOCTYPE html>
+    <html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Title</title>
+    </head>
+    <body>
+        <h1>Head</h1>
+    </body>
+    </html>
 
 index.js
+
+    console.log('hello')
+
+Или по сложнее:
 
     const mult = (a, b) => a * b;
     console.log(mult(2, 4))
 
-## package.json 
+## Конфигурация режимов сборки
+В файле `package.json` прописываем.
+
+Самая простая конфигурация:
+
+    "scripts": {
+        "start": "webpack serve",
+        "dev": "webpack"
+    },
+
+`npm start` - запуск проекта с локальным сервером, папка dist не создастся  
+`npm run dev` - запуск проекта без локального сервера, папка dist создастся  
+
 Конфигурация режимов сборки:
 - `start` - запуск сервера, разработка в реальном времени, в папку `dist` ничего не складывается
     - `npm start`
 - `build-dev` - собирает проект в папку `dist`, в режиме разработки, не сжимает файлы
     - `npm run build-dev`
+    - `npm run build:dev`- так тоже вроде сработает
 - `build-prod` - собирает проект в папку `dist`, в режиме продакшена, сжимает файлы
     - `npm run build-prod`
 - `clear` - очищает папку `dist`

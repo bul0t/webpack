@@ -94,4 +94,13 @@
         type: 'asset/resource',
     },
 
-Для работы с SVG используется пакет SVGO.
+file-loader не прописываем потому что используем как asset.
+
+Для работы с SVG используют пакет SVGO.
+
+## favicon
+В файл `src/index.html` прописываем:
+
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="img/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="img/favicon.png" type="image/png" />

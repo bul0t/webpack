@@ -1,6 +1,17 @@
-example-0
-#example-1
+# самая простая сборка без сжатия HTML, CSS файлов, без обработки JS, изображения сжимаются, шрифты орабатываются
+# только один режим: dev serve
+# example-0
+
+# dev, prod частичное сжатие и обработка
+# example-1
+
+# dev, prod, pug, svg-sprite
 example-2
 
 node_modules
 dist
+
+# Ресурсы
+# https://www.youtube.com/watch?v=IZGNcSuwBZs - Traversy Media
+# https://www.youtube.com/watch?v=o8KMucDpSno - Онлайн-школа MethEd
+# https://www.youtube.com/watch?v=gVenbqg9Rww - GrandpaJS

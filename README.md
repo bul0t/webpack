@@ -3,24 +3,19 @@
 Сайт: https://webpack.js.org
 
 ## О webpack
-Webpack понимает только JavaScript и JSON файлы.
-
 - index.js - центральный файл
-- режимы webpack
-    - `mode: "development"` - режим разработки
-        - файлы не сжаты, можно вносить правки
-        - можно использовать локальный сервер devServer
-            - при изменении файлов, они в папку dist не компилируются
-    - `mode: "production"` - режим продакшена
-        - файлы сжаты, для передачи в рабочий проект
-- webpack.config.js - пользовательская настройка webpack
+- режимы работы webpack
+    - `mode: "development serve"` - режим разработки с сервером, файлы не выгружаются
+    - `mode: "development"` - режим разработки, выгрузка не сжатых файлов
+    - `mode: "production"` - режим продакшена, выгрузка сжатых файлов
+- webpack.config.js - настройка webpack
 
 ## Части webpack
-- loaders (функция) - устанавливают через npm, прописывают в webpack.config.js
+- loaders (функция) - предварительная обработка файлов
 - плагины (класс) - более мощный инструмент чем лоадеры, бывают:
     - предустановленные - установленные по умолчанию
     - сторонние плагины
-- модули ресурсов - отдельные JavaScript модули, заменяют ранее используемые лоадеры, извлекают изображения и шрифты из файлов стилей
+- ресурсы - работаютс с изображениями, шрифтами и т.п.
 
 ## Loaders
 Какие лоадеры работают с файлами расширений:
@@ -33,7 +28,7 @@ Webpack понимает только JavaScript и JSON файлы.
 - JS - babel-loader
 
 ## Plugins
-- MiniCssExtractPlugin - работает со файлами стилей
+- MiniCssExtractPlugin - работает с файлами стилей
 - HTMLWebpackPlugin - работает с файлами HTML
 
 ## Mode и первый запуск
@@ -41,43 +36,30 @@ Webpack понимает только JavaScript и JSON файлы.
 
 - `npm install --save-dev cross-env` - плагин для работы с переменной NODE_ENV
 
-В src/index.js помещаем код:
-
-    const userStack = {
-        language: 'JavaScript',
-        framework: 'Vue'
-    }
-
-    const user = {
-        name: 'Ivan',
-        age: '23',
-        ...userStack
-    }
-
-    console.log(user)
-
 В package.json пишем код:
 
+    // Не работает, потому что NODE_ENV не присваивается
     "scripts": {
         "start": "set NODE_ENV=development&&webpack serve --open", // dev + local server
-        "dev": "set NODE_ENV=development&&webpack",   // dev, компиляция не оптимизированных файлов
-        "build": "cross-env NODE_ENV=production webpack"  // prod
+        "dev": "set NODE_ENV=development&&webpack",                // dev, компиляция не оптимизированных файлов
+        "build": "cross-env NODE_ENV=production webpack"           // prod, продакшн, компиляция оптимизированных файлов
     },
 
+    // Сработает, если установить плагин cross-env
     "scripts": {
         "start": "cross-env NODE_ENV=development webpack serve --open",
         "dev": "cross-env NODE_ENV=development webpack",
         "build": "cross-env NODE_ENV=production webpack"
     },
 
-    // без установки `cross-env`
+    // Сработает
     "scripts": {
-        "start": "webpack serve --open", // dev + local server
-        "dev": "webpack",   // dev, компиляция не оптимизированных файлов
+        "start": "webpack serve --open",         // dev + local server
+        "dev": "webpack",                        // dev, компиляция не оптимизированных файлов
         "build": "webpack --node-env=production" // так тоже сработает
     },
 
-    // и так сработает
+    // Сработает, выяснить зачем нужен set или &&
     "scripts": {
         "start": "NODE_ENV=development webpack serve",
         "dev": "NODE_ENV=development webpack",
@@ -94,7 +76,7 @@ Webpack понимает только JavaScript и JSON файлы.
 - `"build":`
     - в консоли вводим `npm run build`
 
-Создастся папка `dist`. Чтобы в консоли не было предупреждений о `mode`. Настроим файл конфигурации.
+Чтобы в консоли не было предупреждений о `mode`, нужно настроить файл конфигурации `webpack.config.js`.
 
-## IMG
-- создаём src/images
+## Разное
+При запуске нового проекта `npm i`, помимо файла `package.json`, еще нужен файл `package-lock.json`.
