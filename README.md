@@ -57,6 +57,7 @@
         "start": "webpack serve --open",         // dev + local server
         "dev": "webpack",                        // dev, компиляция не оптимизированных файлов
         "build": "webpack --node-env=production" // так тоже сработает
+        // "build": "webpack --mode production"  // проверить
     },
 
     // Сработает, выяснить зачем нужен set или &&

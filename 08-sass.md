@@ -1,12 +1,18 @@
-# SASS
+# Sass
 Работаем с SCSS-файлами.
 
-Переименовываем файл `src/index.css` в `src/index.scss`
+## Импортирвоание в index.js
+В файле `src/index.js` заменяем:
 
-В **src/index.js** заменяем `import './index.css';` на `import './index.scss';`
+    import "./index.css";
+    на
+    import "./index.scss";
+
+Файл `src/index.css` переименовываем в `src/index.scss`
 
 ## Loaders
 https://webpack.js.org/loaders/sass-loader/
+Компилируют `sass` файлы в `css`.
 
 Устанавливаем `sass-loader`, `sass`:
 
@@ -16,7 +22,7 @@ https://webpack.js.org/loaders/sass-loader/
 
     test: /\.(c|sa|sc)ss$/i,
     use: [
-        devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+        MiniCssExtractPlugin.loader,
         'css-loader',
         'sass-loader'
     ],
@@ -44,3 +50,4 @@ src/index.scss
     @import 'style/var';
     @import 'style/style';
 
+Проверяем работу: `npm run dev`, `npm start`.
