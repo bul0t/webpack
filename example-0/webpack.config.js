@@ -7,6 +7,11 @@ module.exports = {
     // mode: 'production',
     // target: 'browserslist',
     devtool: 'source-map',
+    devServer: {
+        port: 3000,
+        open: true,
+        hot: true,
+    },
     entry: {
         bundle: path.resolve(__dirname, 'src/index.js'),
     },
@@ -35,10 +40,19 @@ module.exports = {
                 },
             },
             {
-                test: /\.css$/i,
+                test: /\.(c|sa|sc)ss$/i,
                 use: [
                     MiniCssExtractPlugin.loader,
-                    'css-loader'
+                    'css-loader',
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            postcssOptions: {
+                                plugins: [require('postcss-preset-env')],
+                            },
+                        },
+                    },
+                    'sass-loader'
                 ],
             },
         ],

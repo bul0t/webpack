@@ -10,7 +10,7 @@
 
 Файл `src/index.css` переименовываем в `src/index.scss`
 
-## Loaders
+## sass-loader, sass
 https://webpack.js.org/loaders/sass-loader/
 Компилируют `sass` файлы в `css`.
 
@@ -19,35 +19,35 @@ https://webpack.js.org/loaders/sass-loader/
     npm install sass-loader sass --save-dev
 
 ## webpack.config.js
+В файл webpack.config.js помещаем:
 
-    test: /\.(c|sa|sc)ss$/i,
-    use: [
-        MiniCssExtractPlugin.loader,
-        'css-loader',
-        'sass-loader'
-    ],
+    {
+        test: /\.(c|sa|sc)ss$/i,
+        use: [
+            MiniCssExtractPlugin.loader,
+            'css-loader',
+            'sass-loader'
+        ],
+    }
 
-`npm start`
+Проверяем работу: `npm run dev`, `npm start`.
 
-## Файловая структура
+## Файловая структура Sass
 
     src/style/
-        _style.scss
-        _var.scss
+        _common.scss
+        _mixins.scss
+        _variables.scss
 
+В `src/index.scss` запишем:
 
-src/index.scss
-
-    @import 'style/var';
-    @import 'style/style';
+    @import 'style/variables';
+    @import 'style/mixins';
+    @import 'style/common';
 
 ## normalize.css
 Скачиваем файл normalize.css и добавляем в папку `src/libs/`
 
-src/index.scss
+В `src/index.scss` добавим:
 
-    @import 'libs/normalize'; // без расширения
-    @import 'style/var';
-    @import 'style/style';
-
-Проверяем работу: `npm run dev`, `npm start`.
+    @import 'libs/normalize';
