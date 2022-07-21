@@ -55,6 +55,12 @@ module.exports = {
                     'sass-loader'
                 ],
             },
+            {
+                test: /\.(jpe?g|png|webp|gif|svg)$/i,
+                generator: {
+                    filename: 'image/[name][ext]'
+                }
+            },
         ],
     },
 }

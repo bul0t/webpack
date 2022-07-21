@@ -39,8 +39,6 @@ Template еще можно так: `template: path.resolve(__dirname, 'src', 'in
 `npm start` - проверяем в браузере HTML и JS. Далее устанавливаем лоадеры для автообновления.
 
 ## Импортирвоание в index.js
-Можно не импортировать, а настроить `devServer`.
-
 Импортируем файл `src/index.html` в `src/index.js`:
 
     import './index.html';
@@ -48,7 +46,7 @@ Template еще можно так: `template: path.resolve(__dirname, 'src', 'in
 
 Чтобы импортированные файлы `.html` были обработаны нужно установить **loader**.
 
-## HTML loader
+## html-loader
 https://webpack.js.org/loaders/html-loader/
 Автоматически обновляет браузер при изменении HTML-файла.
 
@@ -69,3 +67,12 @@ webpack.config.js:
     },
 
 `npm start` - проверяет работу обновления сраниц при изменении `src/index.html`.
+
+## Разное
+Настройка без html-loader и импортирования:
+
+    new HtmlWebpackPlugin({
+        title: 'Webpack App',
+        filename: 'index.html',
+        template: 'src/template.html',
+    }),
