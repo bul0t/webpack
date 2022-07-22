@@ -16,21 +16,21 @@ https://webpack.js.org/plugins/html-webpack-plugin/
 При запуске `npm run dev`, файл `dist/index.html` создастся автоматически (не зависимо от того имеется ли он в `src/` или нет).
 
 ### Параметры плагина
+Используем свой файл `src/index.html`:
+
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: './src/index.html', // используем свой HTML-файл
+            minify: false, // не сжимать файл в продакшен режиме
+        }),
+    ],
+
 Созданием файла `dist/index.html` можно управлять через параметры https://github.com/jantimon/html-webpack-plugin#options:
 
     plugins: [
         new HtmlWebpackPlugin({
             title: 'hello', // изменяем title
             filename: 'main.html', // изменяем имя и путь
-        }),
-    ],
-
-Можем использовать свой файл `src/index.html`:
-
-    plugins: [
-        new HtmlWebpackPlugin({
-            template: 'src/index.html', // используем свой HTML-файл
-            minify: false, // не сжимать файл в продакшен режиме
         }),
     ],
 
@@ -48,7 +48,7 @@ Template еще можно так: `template: path.resolve(__dirname, 'src', 'in
 
 ## html-loader
 https://webpack.js.org/loaders/html-loader/
-Автоматически обновляет браузер при изменении HTML-файла.
+Автоматически обновляет браузер при изменении HTML-файла (только при `mode: developer or none`).
 
     npm install --save-dev html-loader
 
@@ -60,16 +60,16 @@ webpack.config.js:
                 test: /\.html$/i,      // какие файлы используем
                 loader: 'html-loader', // пакет
                 options: {
-                    minimize: false,   // не минимизировать при продакшене
+                    minimize: false,   // не минимизировать при продакшене (сработает если и в плагине стоит отмена минимизации)
                 },
             },
         ],
     },
 
-`npm start` - проверяет работу обновления сраниц при изменении `src/index.html`.
+`npm start` - проверяем работу обновления сраниц при изменении `src/index.html`.
 
 ## Разное
-Настройка без html-loader и импортирования:
+Настройка без html-loader и импортирования (автомаическое создание HTML):
 
     new HtmlWebpackPlugin({
         title: 'Webpack App',

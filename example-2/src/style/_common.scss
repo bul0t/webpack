@@ -1,0 +1,11 @@
+body {
+    background-color: $primary_color;
+}
+.container {
+    display: grid;
+    margin: 0 auto;
+    max-width: 1200px;
+    &__link {
+        color: beige;
+    }
+}

@@ -7,11 +7,11 @@ module.exports = {
     // mode: 'production',
     // target: 'browserslist',
     devtool: 'source-map',
-    devServer: {
-        port: 3000,
-        open: true,
-        hot: true,
-    },
+    // devServer: {
+    //     port: 3000,
+    //     open: true,
+    //     hot: true,
+    // },
     entry: {
         bundle: path.resolve(__dirname, 'src/index.js'),
     },
@@ -57,6 +57,27 @@ module.exports = {
             },
             {
                 test: /\.(jpe?g|png|webp|gif|svg)$/i,
+                use: [{
+                    loader: 'image-webpack-loader',
+                    options: {
+                        mozjpeg: {
+                            progressive: true,
+                        },
+                        optipng: {
+                            enabled: false,
+                        },
+                        pngquant: {
+                            quality: [0.65, 0.90],
+                            speed: 4
+                        },
+                        gifsicle: {
+                            interlaced: false,
+                        },
+                        webp: {
+                            quality: 75
+                        },
+                    }
+                }],
                 generator: {
                     filename: 'image/[name][ext]'
                 }

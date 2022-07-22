@@ -46,11 +46,15 @@
 - `[ext]` - текущее расширения
 
 ## Сжатие изображений
-Установите пакет:
+https://www.npmjs.com/package/image-webpack-loader  
+Чтобы сжимать изобржанеия, нужно сначалал установить пакет:
 
     npm install image-webpack-loader --save-dev
 
+Далее в настройки вебпак ввести следущие опции:
+
     {
+        // test: /\.(png|svg|jpg|jpeg|gif)$/i,
         test: /\.(jpe?g|png|webp|gif|svg)$/i,
         use: [{
             loader: 'image-webpack-loader',
@@ -73,12 +77,14 @@
                 },
             }
         }],
-        type: 'asset/resource',
+        generator: {
+            filename: 'image/[name][ext]'
+        },
+        // type: 'asset/resource',
     },
 
-file-loader не прописываем потому что используем как asset.
-
-Для работы с SVG используют пакет SVGO.
+Также можно порабоать с этим плагном: https://webpack.js.org/plugins/image-minimizer-webpack-plugin/  
+Проверяем: `npm run dev`, `npm start`.
 
 ## Favicon
 В файл `src/index.html` прописываем:
@@ -87,7 +93,7 @@ file-loader не прописываем потому что используем
     <link rel="icon" href="img/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="img/favicon.png" type="image/png" />
 
-## Разное
+## Assets
 Подключаем изображения через JavaScript, в `src/index.js` прописываем:
 
     import audi from './img/audi.png';
@@ -104,3 +110,5 @@ file-loader не прописываем потому что используем
     img.src = audi;
     img.width = 300;
     imgWrap.append(img);
+
+Тут понадобиться прописать: `type: 'asset/resource'` в конфигурацию вебпак дял изображений.

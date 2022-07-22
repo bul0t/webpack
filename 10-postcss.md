@@ -25,7 +25,7 @@ https://webpack.js.org/loaders/postcss-loader/
         ],
     },
 
-Выяснить как управлять минимизацией файлов, проверить автоперфиксы.
+Проверить минимизацию файлов, автоперфиксы.
 
 ## Разное
 Итого к этому моменту мы устанавливаем для работы со стилями, следующие плагины: 
@@ -40,3 +40,18 @@ https://webpack.js.org/loaders/postcss-loader/
         postcss
         postcss-preset-env
         --save-dev
+
+Еще можно так записать:
+
+    options: {
+        postcssOptions: {
+            plugins: [
+                [
+                    'postcss-preset-env',
+                    {
+                        // Options
+                    },
+                ],
+            ],
+        },
+    },

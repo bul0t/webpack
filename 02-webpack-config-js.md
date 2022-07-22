@@ -5,7 +5,9 @@ webpack.config.js - файл конфигурации webpack.
 Самое простое:
 
     module.exports = {
-        mode: 'development'
+        mode: 'development',   // развернутый код
+        // mode: 'production', // сжатый
+        // mode: 'none',       // средний
     }
 
 Набрав `npm run dev` в `dist` появится файл `main.js`
@@ -23,7 +25,8 @@ webpack.config.js - файл конфигурации webpack.
         mode: mode
     }
 
-## Конфигурация вывода файлов из src в dist
+## Конфигурация вывода
+Конфигурация source-map, browserslist, clean: true, и вывода файла index.js из src в dist
 
     const path = require('path');
 
@@ -64,11 +67,11 @@ webpack.config.js - файл конфигурации webpack.
         // можно еще указать точки входа
     },
     output: {
-        filename: [name].js, // на выходе будет bundle
+        filename: [name].js, // на выходе будет bundle.index.js
     }
 
 ## .browserslistrs
-.browserslistrs - в корне проекта можно создать файл, с настрйокаи для CSS:
+В корне проекта можно создать файл `.browserslistrs`, с настройками для CSS:
 
     last 2 versions
     not dead

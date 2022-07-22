@@ -45,6 +45,8 @@ https://webpack.js.org/loaders/sass-loader/
     @import 'style/mixins';
     @import 'style/common';
 
+`@use` вместо импорт тоже попробуй.
+
 ## normalize.css
 Скачиваем файл normalize.css и добавляем в папку `src/libs/`
 
