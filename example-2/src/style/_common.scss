@@ -2,9 +2,13 @@ body {
     background-color: $primary_color;
 }
 .container {
+    font-family: 'Ubuntu Mono';
     display: grid;
     margin: 0 auto;
     max-width: 1200px;
+    &__p {
+        font-family: 'Ubuntu Mono Italic';
+    }
     &__link {
         color: beige;
     }

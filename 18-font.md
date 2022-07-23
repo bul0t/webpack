@@ -8,7 +8,7 @@
     {
         test: /\.ttf$/i,
         // test: /\.(woff|woff2|eot|ttf|otf)$/i,
-        type: 'asset/resource',
+        // type: 'asset/resource',
         generator: {
             filename: 'fonts/[name][ext]'
         }
@@ -31,8 +31,8 @@
         src: url('fonts/UbuntuMono-Italic.ttf') format('truetype');
     }
 
-## _fonts.scss
-В файле `src/style/_fonts.scss` прописываем шрифт для body:
+## _common.scss
+В файле `src/style/_common.scss` прописываем шрифт для body и p:
 
     body {
         color: $text-color;
