@@ -2,40 +2,51 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
+// В dev режиме используем web и source-map
+const mode = process.env.NODE_ENV || 'development';
+const devMode = mode === 'development';
+const target = devMode ? 'web' : 'browserslist';
+const devtool = devMode ? 'source-map' : undefined;
+
+console.log('mode: ' + mode)
+console.log('devMode: ' + devMode)
+console.log('target: ' + target)
+console.log('devtool: ' + devtool)
+
 module.exports = {
-    mode: 'development',
-    // mode: 'production',
-    // mode: 'none',
-    devtool: 'source-map',
+    mode,
+    target,
+    devtool,
+    devServer: {
+        port: 8080,
+        open: true,
+        hot: true,
+    },
+    entry: ['@babel/polyfill', path.resolve(__dirname, 'src', 'index.js')],
     output: {
-        path: path.join(__dirname, 'public/'),
-        publicPath: '/', // must be defined any path, `auto` is not supported yet
+        path: path.resolve(__dirname, 'dist'),
         clean: true,
+        filename: '[name].[contenthash].js',
+        assetModuleFilename: 'assets/[name][ext]',
     },
     plugins: [
         new HtmlWebpackPlugin({
-            // template: './src/index.html', // используем свой HTML-файл
-            template: './src/index.pug',
-            filename: 'index.html',
+            template: path.resolve(__dirname, 'src', 'index.html'),
         }),
         new MiniCssExtractPlugin({
-            // filename: 'style.css', // переименуем index.css в style.css
+            filename: '[name].[contenthash].css',
         }),
     ],
     module: {
         rules: [
             {
-                test: /\.html$/i,      // какие файлы используем
-                loader: 'html-loader', // пакет
+                test: /\.html$/i,
+                loader: 'html-loader',
             },
             {
-                test: /\.pug$/,
-                loader: '@webdiscus/pug-loader',
-            },
-            {
-                test: /\.scss$/i,
+                test: /\.(c|sa|sc)ss$/i,
                 use: [
-                    MiniCssExtractPlugin.loader,
+                    devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
                     'css-loader',
                     {
                         loader: 'postcss-loader',
@@ -49,8 +60,14 @@ module.exports = {
                 ],
             },
             {
-                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                test: /\.ttf$/i,
                 type: 'asset/resource',
+                generator: {
+                    filename: 'fonts/[name][ext]'
+                }
+            },
+            {
+                test: /\.(jpe?g|png|webp|gif|svg)$/i,
                 use: [{
                     loader: 'image-webpack-loader',
                     options: {
@@ -72,16 +89,17 @@ module.exports = {
                         },
                     }
                 }],
-                generator: {
-                    filename: 'img/[name][ext]'
-                },
+                type: 'asset/resource',
             },
             {
-                test: /\.ttf$/i,
-                // type: 'asset/resource',
-                generator: {
-                    filename: 'fonts/[name][ext]'
-                }
+                test: /\.m?js$/i,
+                exclude: /(node_modules|bower_components)/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env'],
+                    },
+                },
             },
         ],
     },

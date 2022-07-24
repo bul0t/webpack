@@ -7,7 +7,7 @@ webpack.config.js - файл конфигурации webpack.
     module.exports = {
         mode: 'development',   // развернутый код
         // mode: 'production', // сжатый
-        // mode: 'none',       // средний
+        // mode: 'none',       // без режима
     }
 
 Набрав `npm run dev` в `dist` появится файл `main.js`
@@ -25,28 +25,30 @@ webpack.config.js - файл конфигурации webpack.
         mode: mode
     }
 
-## Конфигурация вывода
-Конфигурация source-map, browserslist, clean: true, и вывода файла index.js из src в dist
+## Конфигурация вывода (стандартная)
+Конфигурация source-map, browserslist, clean: true, ресурсов (и вывода файла index.js из src в dist)
 
     const path = require('path');
 
     module.exports = {
         mode: 'development',
         // mode: 'production',
+        // mode: 'none',
         // devtool: 'source-map',
         // target: 'browserslist',
-        entry: './src/index.js',
+        // entry: './src/index.js',
         output: {
-            filename: 'common.js',
-            path: path.resolve(__dirname, 'dist'),
             clean: true,
+            // filename: 'common.js',
+            // path: path.resolve(__dirname, 'dist'),
+            assetModuleFilename: 'assets/[name][ext]'
         }
     }
 
 Пояснения по коду:
 - `module.exports = {}` - все настройки хранятся в объекте который нужно экспортировать
-- `mode:` - режим сборки development/production
-- `devtool:` - создать карту исходного кода, например для JavaScript или CSS
+- `mode:` - режим сборки development/production/none
+- `devtool:` - создать карту исходного кода, например для CSS или JavaScript
 - `target:` - можно создать файл `src/.browserslist` и указать параметры поддерживаемых браузеров для CSS
 - `entry:` - точка входа проекта, можно прописать:
     - `'./src/index.js'`
@@ -58,7 +60,8 @@ webpack.config.js - файл конфигурации webpack.
         - `bundle.[name].js`
         - `[name].[contenthash].js`
     - `path:` - куда складываем файлы
-    - `clean:` true - очищаем папку dist, работает только при запуске без сервера
+    - `clean: true` - очищаем папку dist, работает только при запуске без сервера
+    - `assetModuleFilename:` - куда складываем ресурсы: изображения, шрифты и т.п.
 
 Пример с `entry`:
 
@@ -77,7 +80,8 @@ webpack.config.js - файл конфигурации webpack.
     not dead
     > 0.5%
 
-## Проверяем работу модулей ES6
+## Разное
+### Проверяем работу модулей ES6
 В `src/index.js` прописываем:
 
     import hello from './hello.js'
@@ -108,5 +112,5 @@ webpack.config.js - файл конфигурации webpack.
     </body>
     </html>
 
-Открываем LiveServer, запускаем webpack `npm run build` через mode: development/production, проверяем работу скрипта.  
+Открываем LiveServer, запускаем webpack `npm run build` через mode: development/production/none, проверяем работу скрипта.  
 Можно через npm устанавливать различные пакеты (jquery, bootstrap и т.п.) и импортировать их в `src/index.js`.  

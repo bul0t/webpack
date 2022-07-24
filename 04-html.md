@@ -1,6 +1,11 @@
 # HTML
 Работаем с HTML-файлами.
 
+- устанавливаем плагин `html-webpack-plugin`
+- устанавливаем лоадер `html-loader`
+- настраиваем `webpack.config.js`
+- импортируем `index.html` в `index.js`
+
 ## Плагин
 https://webpack.js.org/plugins/html-webpack-plugin/  
 Устанавливаем плагин **HtmlWebpackPlugin**:
@@ -13,7 +18,7 @@ https://webpack.js.org/plugins/html-webpack-plugin/
 
     plugins: [new HtmlWebpackPlugin()],
 
-При запуске `npm run dev`, файл `dist/index.html` создастся автоматически (не зависимо от того имеется ли он в `src/` или нет).
+Если набрать `npm run dev`, то файл `dist/index.html` создастся автоматически (не зависимо от того имеется ли он в `src/` или нет).
 
 ### Параметры плагина
 Используем свой файл `src/index.html`:
@@ -34,9 +39,7 @@ https://webpack.js.org/plugins/html-webpack-plugin/
         }),
     ],
 
-Template еще можно так: `template: path.resolve(__dirname, 'src', 'index.html'),`.
-
-`npm start` - проверяем в браузере HTML и JS. Далее устанавливаем лоадеры для автообновления.
+Значение в `template:` еще можно выставить так: `path.resolve(__dirname, 'src', 'index.html'),`.
 
 ## Импортирвоание в index.js
 Импортируем файл `src/index.html` в `src/index.js`:
@@ -66,7 +69,8 @@ webpack.config.js:
         ],
     },
 
-`npm start` - проверяем работу обновления сраниц при изменении `src/index.html`.
+`npm run dev` - проверяем работу, обработки `src/index.html` и перемещения его в папку `dist/`.  
+`npm start` - проверяем работу сервера обновления страницы при изменении `src/index.html`.
 
 ## Разное
 Настройка без html-loader и импортирования (автомаическое создание HTML):

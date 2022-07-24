@@ -5,42 +5,35 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = {
     mode: 'development',
     // mode: 'production',
-    // target: 'browserslist',
+    // mode: 'none',
     devtool: 'source-map',
-    // devServer: {
-    //     port: 3000,
-    //     open: true,
-    //     hot: true,
-    // },
-    entry: {
-        bundle: path.resolve(__dirname, 'src/index.js'),
-    },
     output: {
-        // filename: 'common.js',
-        filename: '[name].js',
-        path: path.resolve(__dirname, 'dist'),
+        path: path.join(__dirname, 'public/'),
+        publicPath: '/', // must be defined any path, `auto` is not supported yet
         clean: true,
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: 'src/index.html', // используем свой HTML-файл
-            minify: false,
+            // template: './src/index.html', // используем свой HTML-файл
+            template: './src/index.pug',
+            filename: 'index.html',
         }),
         new MiniCssExtractPlugin({
-            filename: 'style.css'
+            // filename: 'style.css', // переименуем index.css в style.css
         }),
     ],
     module: {
         rules: [
             {
-                test: /\.html$/i,
-                loader: 'html-loader',
-                options: {
-                    minimize: false,
-                },
+                test: /\.html$/i,      // какие файлы используем
+                loader: 'html-loader', // пакет
             },
             {
-                test: /\.(c|sa|sc)ss$/i,
+                test: /\.pug$/,
+                loader: '@webdiscus/pug-loader',
+            },
+            {
+                test: /\.scss$/i,
                 use: [
                     MiniCssExtractPlugin.loader,
                     'css-loader',
@@ -56,7 +49,8 @@ module.exports = {
                 ],
             },
             {
-                test: /\.(jpe?g|png|webp|gif|svg)$/i,
+                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                type: 'asset/resource',
                 use: [{
                     loader: 'image-webpack-loader',
                     options: {
@@ -79,7 +73,14 @@ module.exports = {
                     }
                 }],
                 generator: {
-                    filename: 'image/[name][ext]'
+                    filename: 'img/[name][ext]'
+                },
+            },
+            {
+                test: /\.ttf$/i,
+                // type: 'asset/resource',
+                generator: {
+                    filename: 'fonts/[name][ext]'
                 }
             },
         ],

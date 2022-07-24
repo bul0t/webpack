@@ -1,5 +1,5 @@
 {
-  "name": "example-0",
+  "name": "example-2",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@webdiscus/pug-loader": "^2.7.2",
     "css-loader": "^6.7.1",
     "html-loader": "^4.1.0",
     "html-webpack-plugin": "^5.5.0",
@@ -19,6 +20,8 @@
     "postcss": "^8.4.14",
     "postcss-loader": "^7.0.1",
     "postcss-preset-env": "^7.7.2",
+    "pug": "^2.0.4",
+    "pug-loader": "^2.4.0",
     "sass": "^1.53.0",
     "sass-loader": "^13.0.2",
     "webpack": "^5.73.0",
