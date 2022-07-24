@@ -1,5 +1,5 @@
-# PUG
-Устанавливаем пакет для работы совместно с `html-webpack-plugin`  
+# pug-loader
+Устанавливаем пакет pug-loader для работы совместно с `html-webpack-plugin`  
 https://github__com.teameo.ca/trasherdk/pug-loader#using-html-webpack-plugin  
 
     npm install @webdiscus/pug-loader --save-dev
@@ -58,6 +58,5 @@ https://github__com.teameo.ca/trasherdk/pug-loader#usage-embedded-resources
     },
 
 ## Разное
-- https://github__com.teameo.ca/trasherdk/pug-loader:
+- https://github__com.teameo.ca/trasherdk/pug-loader
 - https://www.npmjs.com/package/@webdiscus/pug-loader
-- Чтобы не сжимать HTML посмотри это: https://www.npmjs.com/package/@webdiscus/pug-loader#method-html
